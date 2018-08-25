@@ -28,6 +28,8 @@ struct RobotGrid
 {
 	vector<vector<GridPoint>> map;
 	int rows, cols, x, y;
+	int numOfInstructions = 0;
+	int loopSize = 0;
 };
 
 void initializeGrid(RobotGrid &grid, ifstream &fin)
@@ -52,10 +54,26 @@ void initializeGrid(RobotGrid &grid, ifstream &fin)
 
 }
 
-void traverseGrid(RobotGrid grid)
+void traverseGrid(RobotGrid &grid)
 {
 	Point robot;
+	bool finished = false;
+	
+	// Initialize the start point of the robot
+	robot.x = grid.x;
+	robot.y = grid.y;
 
+	while (!finished)
+	{
+		if (robot.x < 0 || robot.x > grid.rows || robot.y < 0 || robot.y > grid.cols)
+		{
+			finished = true;
+		}
+		else if (grid.map[robot.x][robot.y].visited)
+		{
+			grid.loopSize = grid.numOfInstructions - grid.map[robot.x][robot.y].instructionCount;
+		}
+	}
 }
 
 int main()

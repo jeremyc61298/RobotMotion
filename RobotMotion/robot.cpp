@@ -11,6 +11,12 @@ using std::ofstream;
 using std::vector;
 using std::string;
 
+struct Point
+{
+	int x = 0;
+	int y = 0;
+};
+
 struct GridPoint
 {
 	char directionToMove;
@@ -46,6 +52,12 @@ void initializeGrid(RobotGrid &grid, ifstream &fin)
 
 }
 
+void traverseGrid(RobotGrid grid)
+{
+	Point robot;
+
+}
+
 int main()
 {
 	ifstream fin("robot.in");
@@ -64,7 +76,7 @@ int main()
 	while (grid.rows != 0 && grid.cols != 0 && grid.x != 0 && grid.y != 0)
 	{
 		initializeGrid(grid, fin);
-
+		traverseGrid(grid);
 		// Read in the next grid information
 		fin >> grid.rows >> grid.cols >> grid.x >> grid.y;
 		fin.ignore();
